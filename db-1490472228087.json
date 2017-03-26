@@ -1,0 +1,76 @@
+{
+  "banks": [
+    {
+      "id": 0,
+      "name": "Bank of America"
+    },
+    {
+      "id": 1,
+      "name": "Deutch Bank"
+    }
+  ],
+  "transactions": [
+    {
+      "id": 0,
+      "bankId": 1,
+      "amount": 200
+    },
+    {
+      "id": 1,
+      "bankId": 1,
+      "amount": 100
+    },
+    {
+      "id": 2,
+      "bankId": 0,
+      "amount": 10
+    },
+    {
+      "amount": 50,
+      "bankId": 1,
+      "id": 3
+    },
+    {
+      "amount": "99",
+      "bankId": "0",
+      "id": 4
+    },
+    {
+      "amount": "88",
+      "bankId": "0",
+      "id": 6
+    },
+    {
+      "amount": "999",
+      "bankId": "1",
+      "id": 9
+    },
+    {
+      "amount": "1",
+      "bankId": "1",
+      "id": 10
+    },
+    {
+      "amount": "2",
+      "bankId": "0",
+      "id": 11
+    },
+    {
+      "amount": "111",
+      "bankId": "0",
+      "id": 12
+    }
+  ],
+  "users": [
+    {
+      "id": 0,
+      "username": "tim",
+      "password": "secret"
+    },
+    {
+      "id": 1,
+      "username": "kim",
+      "password": "secret"
+    }
+  ]
+}
