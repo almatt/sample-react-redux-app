@@ -46,7 +46,7 @@ export const createTransaction = transaction => dispatch => {
           .then(json => dispatch(createdT(json)))
       }
     })
-    .catch(() => dispatch(creatingTFailed())
+    .catch(() => dispatch(creatingTFailed()))
 }
 
 const removingItem = () => ({
