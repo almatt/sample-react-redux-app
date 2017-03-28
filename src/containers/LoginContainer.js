@@ -9,11 +9,10 @@ const mapStateToProps = store => ({
   username: store.auth.username,
   isLoading: store.auth.isLoading,
   isAuthenticated: store.auth.isAuthenticated,
-  didFailed: store.auth.didFailed
+  didFailed: store.auth.didFailed,
+  error: store.auth.error
 })
-// const mapStateToProps = store => ({
-//   ...{ username, isLoading, isAuthenticated} = store.auth
-// })
+
 const mapDispatchToProps = dispatch => ({
   logIn(user) {
     dispatch(login(user))

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import List from '../components/List'
+import Transactions from '../components/Transactions'
 import {
   fetchTransactions,
   removeItem
@@ -23,6 +23,6 @@ const mapDispatchToProps = dispatch => ({
 const TransactionsContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(List)
+)(Transactions)
 
 export default TransactionsContainer

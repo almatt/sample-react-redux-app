@@ -5,7 +5,7 @@ export const TRANSACTIONS_CREATED   = 'TRANSACTIONS_CREATED'
 export const TRANSACTIONS_REQUEST_FAILED  = 'TRANSACTIONS_REQUEST_FAILED'
 export const TRANSACTIONS_CREATING_FAILED = 'TRANSACTIONS_CREATING_FAILED'
 export const TRANSACTION_REMOVING = 'TRANSACTION_REMOVING'
-export const TRANSACTION_REMOVED = 'TRANSACTION_REMOVED'
+export const TRANSACTION_REMOVED  = 'TRANSACTION_REMOVED'
 
 const requestTransactions = () => ({
   type: TRANSACTIONS_REQUEST
@@ -43,18 +43,10 @@ export const createTransaction = transaction => dispatch => {
     .then(response => {
       if (response.ok) {
         response.json()
-          .then(json => {
-            console.log('Транзакция успешно добавлена')
-            dispatch(createdT(json))
-          })
-      } else {
-        response.json()
-          .then(json => {
-            console.log('Ошибка добавления транзакции', json)
-            dispatch(creatingTFailed())
-          })
+          .then(json => dispatch(createdT(json)))
       }
     })
+    .catch(() => dispatch(creatingTFailed())
 }
 
 const removingItem = () => ({
@@ -75,14 +67,8 @@ export const removeItem = id => dispatch => {
       if (response.ok) {
         response.json()
           .then(json => {
-            console.log('Транзакция успешно удалена', json)
             dispatch(removedItem())
             dispatch(fetchTransactions())
-          })
-      } else {
-        response.json()
-          .then(json => {
-            console.log('Ошибка удаления транзакции', json)
           })
       }
     })

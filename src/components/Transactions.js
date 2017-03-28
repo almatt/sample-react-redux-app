@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Table, Row, Col, Form, FormGroup, Label, Button } from 'reactstrap'
 import icons from 'glyphicons'
 
-class List extends Component {
+class Transactions extends Component {
 
   static propTypes: {
     getTransactions: PropTypes.func.isRequired,
@@ -20,7 +20,6 @@ class List extends Component {
   deleteTransaction(id) {
     const { deleteItem } = this.props
     deleteItem(id)
-    console.log('Удаляем транзакцию с id', id)
   }
 
   render() {
@@ -68,4 +67,4 @@ class List extends Component {
   }
 }
 
-export default List
+export default Transactions

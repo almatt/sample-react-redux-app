@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Redirect,
   Link,
   Switch
 } from 'react-router-dom'
 import { Container, Button } from 'reactstrap'
-import List from './containers/TransactionsContainer'
-import Login from './containers/LoginContainer'
-import AddForm from './containers/AddTransactionContainer'
+import TransactionsContainer from './containers/TransactionsContainer'
+import LoginContainer from './containers/LoginContainer'
+import AddTransactionContainer from './containers/AddTransactionContainer'
 import Navbar from './components/Navbar'
 
 
@@ -44,19 +44,19 @@ class App extends Component {
             <Switch>
               <Route exact path="/" render={() => (
                 isAuthenticated ? (
-                  <List />
+                  <TransactionsContainer />
                 ) : (
                   <Redirect to="/login"/>
                 )
               )}/>
               <Route path="/add" render={() => (
                 isAuthenticated ? (
-                  <AddForm />
+                  <AddTransactionContainer />
                 ) : (
                   <Redirect to="/login"/>
                 )
               )}/>
-              <Route path="/login" component={Login} />
+              <Route path="/login" component={LoginContainer} />
               <Route path="/logout" render={() => {
                 localStorage.clear()
                 logOut()
@@ -72,7 +72,7 @@ class App extends Component {
 }
 
 const NoMatch = ({ location }) => (
-  <h3>Не найдено <code>{location.pathname}</code></h3>
+  <h3>404 Не найдено <code>{location.pathname}</code></h3>
 )
 
 export default App

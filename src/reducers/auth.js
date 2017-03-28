@@ -2,14 +2,16 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
-  LOGOUT
+  LOGOUT,
+  ERR_CONNECTION
 } from '../actions/auth'
 
 const initialState = {
   isAuthenticated: false,
   isLoading: false,
   didFailed: false,
-  username: ''
+  username: '',
+  error: ''
 }
 
 const auth = (state = initialState, action) => {
@@ -18,7 +20,8 @@ const auth = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        didFailed: false
+        didFailed: false,
+        error: ''
       }
     case LOGIN_SUCCESS:
       return {
@@ -26,7 +29,8 @@ const auth = (state = initialState, action) => {
         isLoading: false,
         isAuthenticated: true,
         username: action.username,
-        didFailed: false
+        didFailed: false,
+        error: ''
       }
     case LOGIN_FAILED:
       return {
@@ -34,14 +38,24 @@ const auth = (state = initialState, action) => {
         isLoading: false,
         isAuthenticated: false,
         username: '',
-        didFailed: true
+        didFailed: true,
+        error: 'Неправильное имя пользователя или пароль'
       }
     case LOGOUT:
       return {
         ...state,
         isAuthenticated: false,
         username: '',
-        didFailed: false
+        didFailed: false,
+        error: ''
+      }
+    case ERR_CONNECTION:
+      return {
+        ...state,
+        isAuthenticated: false,
+        username: '',
+        didFailed: true,
+        error: 'Ошибка соединения'
       }
     default:
       return state

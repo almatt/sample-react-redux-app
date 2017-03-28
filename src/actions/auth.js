@@ -2,6 +2,7 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILED = 'LOGIN_FAILED'
 export const LOGOUT = 'LOGOUT'
+export const ERR_CONNECTION = 'ERR_CONNECTION'
 
 const requestLogin = () => ({
   type: LOGIN_REQUEST
@@ -13,6 +14,9 @@ export const successLogin = username => ({
 const failedLogin = () => ({
   type: LOGIN_FAILED
 })
+const errConnection = () => ({
+  type: ERR_CONNECTION
+})
 export const login = user => dispatch => {
   dispatch(requestLogin())
   fetch(`http://localhost:3000/users?username=${user.username}&password=${user.password}`)
@@ -22,18 +26,14 @@ export const login = user => dispatch => {
           .then(json => {
             if(json.length) {
               dispatch(successLogin(user.username))
-              console.log('Авторизация успешно')
               localStorage.setItem('username', json[0].username)
             } else {
               dispatch(failedLogin())
-              console.log('Неправильный имя пользователя или пароль', json)
             }
           })
-      } else {
-        response.json()
-          .then(json => console.log('Ошибка сети', json))
       }
     })
+    .catch(() => dispatch(errConnection()))
 }
 
 export const logout = () => ({

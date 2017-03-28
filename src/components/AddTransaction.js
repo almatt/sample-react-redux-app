@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Alert, Table, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap'
 
-class AddForm extends Component {
+class AddTransaction extends Component {
 
   static propTypes: {
     addTransaction: PropTypes.func.isRequired,
@@ -22,13 +22,11 @@ class AddForm extends Component {
     e.preventDefault()
     const { addTransaction } = this.props
     addTransaction({
-      amount: this.amount.value,
-      bankId: this.bank.value
+      amount: e.target.amount.value,
+      bankId: e.target.bankId.value
     })
-    console.log('amount', this.amount.value)
-    console.log('bank', this.bank.value)
-    this.amount.value = ''
-    this.bank.value = -1
+    e.target.amount.value = ''
+    e.target.bankId.value = -1
   }
 
   render() {
@@ -56,7 +54,6 @@ class AddForm extends Component {
                 type="number"
                 name="amount"
                 id="amount"
-                ref={(node) => { this.amount = node }}
                 className="form-control"
                 placeholder="Сумма"
               />
@@ -65,8 +62,7 @@ class AddForm extends Component {
               <Label for="bank">Банк</Label>
               <select
                 id="bank"
-                name="select"
-                ref={node => { this.bank = node }}
+                name="bankId"
                 className="form-control"
               >
                 <option value={-1}>{isLoading ? 'Загрузка...' : 'Выберите банк'}</option>
@@ -75,7 +71,7 @@ class AddForm extends Component {
                 ))}
               </select>
             </FormGroup>
-            <Button type="submit" outline color="primary" block>{isCreating ? 'Добавление' : 'Добавить'}</Button>
+            <Button type="submit" outline color="primary" block>{isCreating ? 'Добавление...' : 'Добавить'}</Button>
           </Form>
         </Col>
       </Row>
@@ -83,4 +79,4 @@ class AddForm extends Component {
   }
 }
 
-export default AddForm
+export default AddTransaction

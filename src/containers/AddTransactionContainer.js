@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import List from '../components/AddForm'
+import AddTransaction from '../components/AddTransaction'
 import { fetchBanks } from '../actions/banks'
 import { createTransaction } from '../actions/transactions'
 
@@ -20,9 +20,9 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
-const BanksContainer = connect(
+const AddTransactionContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(List)
+)(AddTransaction)
 
-export default BanksContainer
+export default AddTransactionContainer

@@ -16,17 +16,15 @@ class Login extends Component {
     e.preventDefault()
     const { logIn } = this.props
     logIn({
-      username: this.username.value,
-      password: this.password.value
+      username: e.target.username.value,
+      password: e.target.password.value
     })
-    console.log('username', this.username.value)
-    console.log('password', this.password.value);
-    this.username.value = ''
-    this.password.value = ''
+    e.target.username.value = ''
+    e.target.password.value = ''
   }
 
   render() {
-    const { isLoading, didFailed, isAuthenticated } = this.props
+    const { isLoading, didFailed, isAuthenticated, error } = this.props
     return (
       <Row className="justify-content-center">
         <Col sm="6" lg="4">
@@ -34,7 +32,7 @@ class Login extends Component {
           {didFailed
             &&
             <Alert color="danger">
-              <strong>Упс!</strong> Неправильное имя пользователя или пароль
+              {error}
             </Alert>
           }
           {isAuthenticated
@@ -50,7 +48,6 @@ class Login extends Component {
                 type="text"
                 name="username"
                 id="username"
-                ref={(node) => { this.username = node }}
                 className="form-control"
                 placeholder="Ваше имя"
                 required
@@ -62,7 +59,6 @@ class Login extends Component {
                 type="password"
                 name="password"
                 id="pwdLabel"
-                ref={node => { this.password = node }}
                 className="form-control"
                 placeholder="Ваш пароль"
                 required
