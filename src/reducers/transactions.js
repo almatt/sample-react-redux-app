@@ -68,6 +68,7 @@ const transactions = (state = initialState, action) => {
     case TRANSACTION_REMOVING:
       return {
         ...state,
+        didCreated: false,
         isLoading: true
       }
     case TRANSACTION_REMOVED:
