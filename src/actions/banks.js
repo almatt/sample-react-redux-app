@@ -1,10 +1,10 @@
 export const BANKS_REQUEST   = 'BANKS_REQUEST'
 export const BANKS_RECEIVE   = 'BANKS_RECEIVE'
 
-const requestBanks = () => ({
+export const requestBanks = () => ({
   type: BANKS_REQUEST
 })
-const receiveBanks = banks => ({
+export const receiveBanks = banks => ({
   type: BANKS_RECEIVE,
   banks
 })

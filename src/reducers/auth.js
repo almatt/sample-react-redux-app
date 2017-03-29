@@ -52,6 +52,7 @@ const auth = (state = initialState, action) => {
     case ERR_CONNECTION:
       return {
         ...state,
+        isLoading: false,
         isAuthenticated: false,
         username: '',
         didFailed: true,

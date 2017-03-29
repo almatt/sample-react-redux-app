@@ -1,23 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import {
-  HashRouter as Router,
-  Route,
-  Redirect,
-  Link,
-  Switch
+  HashRouter as Router
 } from 'react-router-dom'
-import { Container, Button } from 'reactstrap'
-import TransactionsContainer from './containers/TransactionsContainer'
-import LoginContainer from './containers/LoginContainer'
-import AddTransactionContainer from './containers/AddTransactionContainer'
-import Navbar from './components/Navbar'
-
+import NavbarContainer from './containers/NavbarContainer'
+import Routing from './Routing'
 
 class App extends Component {
 
   static propTypes: {
     isAuthenticated: PropTypes.bool.isRequired,
-    isLoading: PropTypes.bool.isRequired,
     username: PropTypes.string.isRequired,
     autoLogin: PropTypes.func.isRequired,
     logOut: PropTypes.func.isRequired
@@ -31,48 +22,19 @@ class App extends Component {
   }
 
   render() {
-    const { isAuthenticated, isLoading, username, logOut } = this.props
+    const { isAuthenticated, username, logOut } = this.props
     return (
       <Router>
         <div>
-          <Navbar
-            isLoading={isLoading}
+          <NavbarContainer
             isAuthenticated={isAuthenticated}
             username={username}
           />
-          <Container>
-            <Switch>
-              <Route exact path="/" render={() => (
-                isAuthenticated ? (
-                  <TransactionsContainer />
-                ) : (
-                  <Redirect to="/login"/>
-                )
-              )}/>
-              <Route path="/add" render={() => (
-                isAuthenticated ? (
-                  <AddTransactionContainer />
-                ) : (
-                  <Redirect to="/login"/>
-                )
-              )}/>
-              <Route path="/login" component={LoginContainer} />
-              <Route path="/logout" render={() => {
-                localStorage.clear()
-                logOut()
-                return <Redirect to="/login"/>
-              }}/>
-              <Route component={NoMatch}/>
-            </Switch>
-          </Container>
+          <Routing isAuthenticated={isAuthenticated}/>
         </div>
       </Router>
     )
   }
 }
-
-const NoMatch = ({ location }) => (
-  <h3>404 Не найдено <code>{location.pathname}</code></h3>
-)
 
 export default App

@@ -4,16 +4,21 @@ import {
   fetchTransactions,
   removeItem
 } from '../actions/transactions'
+import { fetchBanks } from '../actions/banks'
 
 const mapStateToProps = store => ({
   transactions: store.transactions.items,
-  isLoading: store.transactions.isLoading,
+  banks: store.banks.items,
+  isLoading: store.transactions.isLoading || store.banks.isLoading,
   isAuthenticated: store.auth.isAuthenticated
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   getTransactions() {
     dispatch(fetchTransactions())
+  },
+  getBanks() {
+    dispatch(fetchBanks())
   },
   deleteItem(id) {
     dispatch(removeItem(id))

@@ -5,16 +5,19 @@ import icons from 'glyphicons'
 class Transactions extends Component {
 
   static propTypes: {
-    getTransactions: PropTypes.func.isRequired,
     deleteItem: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
     transactions: PropTypes.array.isRequired,
+    banks: PropTypes.array.isRequired,
+    getTransactions: PropTypes.func.isRequired,
+    getBanks: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
-    const { getTransactions } = this.props
-    getTransactions()
+    const { transactions, getTransactions, banks, getBanks } = this.props
+    if (!transactions.length)
+      getTransactions()
   }
 
   deleteTransaction(id) {
@@ -23,12 +26,12 @@ class Transactions extends Component {
   }
 
   render() {
-    const { isLoading, transactions } = this.props
+    const { isLoading, transactions, banks } = this.props
     const isEmpty = transactions.length === 0
     return (
       <Row>
         <Col>
-          <h4 className="page__title">Table of transactions</h4>
+          <h4 className="page__title">Список транзакции</h4>
           <Table hover>
             <thead>
               <tr>
@@ -39,13 +42,14 @@ class Transactions extends Component {
               </tr>
             </thead>
             <tbody>
+              {isLoading && <tr><td></td><td>Загрузка...</td></tr>}
               {isEmpty
-                ? (isLoading ? <tr><td></td><td>Загрузка...</td></tr> : <tr><td></td><td>Нет транзакции</td></tr>)
+                ? <tr><td></td><td>Нет транзакции</td></tr>
                 : transactions.map((transaction , i) => (
                   <tr key={i}>
                     <th scope="row">{i + 1}</th>
                     <td>{transaction.amount}</td>
-                    <td>{transaction.bank.name}</td>
+                    <td>{transaction.bankName}</td>
                     <td>
                       <Button
                         outline

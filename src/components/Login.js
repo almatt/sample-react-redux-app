@@ -28,7 +28,7 @@ class Login extends Component {
     return (
       <Row className="justify-content-center">
         <Col sm="6" lg="4">
-          <h4 className="page__title">Login</h4>
+          <h4 className="page__title">Вход</h4>
           {didFailed
             &&
             <Alert color="danger">
@@ -64,7 +64,9 @@ class Login extends Component {
                 required
               />
             </FormGroup>
-            <Button type="submit" outline color="primary" block>{isLoading ? 'Подождите' : 'Вход'}</Button>
+            <Button type="submit" outline color="primary" block>
+              {isLoading ? 'Подождите' : 'Вход'}
+            </Button>
           </Form>
         </Col>
       </Row>

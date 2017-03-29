@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import { Container, Collapse, Navbar, NavbarToggler, Nav, NavItem } from 'reactstrap'
-import { NavLink, Link } from 'react-router-dom'
+import { Container, Collapse, Navbar, NavbarToggler, Nav, NavItem, Button } from 'reactstrap'
+import { NavLink, Redirect, Link } from 'react-router-dom'
 
 class MyNavbar extends Component {
 
   static propTypes: {
-    isAuthenticated: PropTypes.bool.isRequired
+    isLoading: PropTypes.bool.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+    username: PropTypes.string.isRequired,
+    logOut: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -22,6 +25,14 @@ class MyNavbar extends Component {
     });
   }
 
+  handleLogout(e) {
+    e.preventDefault()
+    const { logOut, isAuthenticated } = this.props
+    localStorage.clear()
+    if (isAuthenticated)
+      logOut()
+  }
+
   render() {
     const { isAuthenticated, isLoading, username } = this.props
     return (
@@ -36,10 +47,12 @@ class MyNavbar extends Component {
               }
               {isAuthenticated
                 ? <NavLink to="/" className="nav-link">{username}</NavLink>
-                : <NavLink to="/login" className="nav-link">Вход</NavLink>
+                : !isLoading && <NavLink to="/login" className="nav-link">Вход</NavLink>
               }
               {isAuthenticated &&
-                <NavLink to="/logout" className="nav-link">Выйти</NavLink>
+                <a className="nav-link" href="#" onClick={this.handleLogout.bind(this)}>
+                  Выйти
+                </a>
               }
               {isLoading && '.....'}
             </Nav>

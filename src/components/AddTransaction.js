@@ -14,16 +14,17 @@ class AddTransaction extends Component {
   }
 
   componentDidMount() {
-    const { getBanks } = this.props
-    getBanks()
+    const { banks, getBanks } = this.props
+    if (!banks.length)
+      getBanks()
   }
 
   handleSubmit(e) {
     e.preventDefault()
     const { addTransaction } = this.props
     addTransaction({
-      amount: e.target.amount.value,
-      bankId: e.target.bankId.value
+      amount: parseInt(e.target.amount.value),
+      bankId: parseInt(e.target.bankId.value)
     })
     e.target.amount.value = ''
     e.target.bankId.value = -1

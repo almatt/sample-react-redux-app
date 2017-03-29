@@ -31,44 +31,9 @@
       "id": 3
     },
     {
-      "amount": "99",
-      "bankId": "0",
+      "amount": 3300,
+      "bankId": 1,
       "id": 4
-    },
-    {
-      "amount": "999",
-      "bankId": "1",
-      "id": 9
-    },
-    {
-      "amount": "1",
-      "bankId": "1",
-      "id": 10
-    },
-    {
-      "amount": "2",
-      "bankId": "0",
-      "id": 11
-    },
-    {
-      "amount": "111",
-      "bankId": "0",
-      "id": 12
-    },
-    {
-      "amount": "911",
-      "bankId": "1",
-      "id": 14
-    },
-    {
-      "amount": "918",
-      "bankId": "0",
-      "id": 15
-    },
-    {
-      "amount": "3300",
-      "bankId": "0",
-      "id": 16
     }
   ],
   "users": [

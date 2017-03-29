@@ -1,24 +1,24 @@
 import { connect } from 'react-redux'
-import App from '../App'
+import Navbar from '../components/Navbar'
 import {
-  successLogin,
   logout
 } from '../actions/auth'
 
 const mapStateToProps = store => ({
+  isLoading: store.auth.isLoading,
   isAuthenticated: store.auth.isAuthenticated,
   username: store.auth.username
 })
 
 const mapDispatchToProps = dispatch => ({
-  autoLogin(username) {
-    dispatch(successLogin(username))
+  logOut() {
+    dispatch(logout())
   }
 })
 
-const AppContainer = connect(
+const NavbarContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(Navbar)
 
-export default AppContainer
+export default NavbarContainer
